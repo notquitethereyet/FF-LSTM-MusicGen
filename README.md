@@ -4,7 +4,7 @@ This project uses an LSTM neural network to generate music in MIDI format. Train
 
 ## Features
 
-* Train an LSTM model with PyTorch to generate MIDI music
+* Train an LSTM model with PyTorch to generate MIDI files
 * Support for data augmentation and temperature sampling for diverse outputs
 * Lightweight and modular codebase
 
@@ -62,6 +62,12 @@ python generate.py
 
 Generated music is saved as `output_music.mid`.
 
+Listen to the latest generated sample:
+<audio controls>
+    <source src="output_music.mid" type="audio/midi">
+    Your browser does not support the audio element.
+</audio>
+
 ## Model Overview
 
 * Architecture: 3 LSTM layers (512 units), batch normalization, dropout, dense layers, softmax output
@@ -80,12 +86,12 @@ Augment your dataset by transposing MIDI files to multiple keys for better gener
 ## Troubleshooting
 
 * Repetitive output:
-    * Use temperature sampling (generate.py)
-    * Add more training data
-    * Reduce learning rate
+        * Use temperature sampling (generate.py)
+        * Add more training data
+        * Reduce learning rate
 
 * Memory errors:
-    * Decrease batch size in train.py
+        * Decrease batch size in train.py
 
 ## License
 
