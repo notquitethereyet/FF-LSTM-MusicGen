@@ -62,17 +62,7 @@ python generate.py
 
 Generated music is saved as `output_music.mid`.
 
-Listen to the latest generated sample:
-## Example Output
-Play the generated MIDI file directly in your browser:
-
-<script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
-
-<midi-player
-  src="https://github.com/notquitethereyet/FF-LSTM-MusicGen/blob/52d100732eda83e071c83c81ba7b1cd189735639/output_music.mid"
-  sound-font visualizer="#myVisualizer">
-</midi-player>
-<midi-visualizer type="piano-roll" id="myVisualizer"></midi-visualizer>
+~~Listen to the latest generated sample:~~
 
 
 ## Model Overview
