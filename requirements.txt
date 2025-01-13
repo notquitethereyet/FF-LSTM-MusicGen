@@ -1,0 +1,5 @@
+torch           # PyTorch for building the LSTM model
+numpy           # NumPy for numerical computations
+music21         # Music21 for handling MIDI files
+pandas          # Optional: For managing data if needed later
+tqdm            # Optional: Progress bars for data loading/training
