@@ -1,4 +1,4 @@
-# LSTM Music Generator 🎵
+# LSTM MusicGen trained on Final Fantasy Music
 
 This project uses an LSTM neural network to generate music in MIDI format. Trained on a dataset of MIDI files, the model predicts sequences of notes and chords, creating new musical compositions.
 
