@@ -4,9 +4,9 @@ This project uses an LSTM neural network to generate music in MIDI format. Train
 
 ## Features
 
-* Train an LSTM model with PyTorch to generate MIDI files
-* Support for data augmentation and temperature sampling for diverse outputs
-* Lightweight and modular codebase
+- Train an LSTM model with PyTorch to generate MIDI files
+- Support for data augmentation and temperature sampling for diverse outputs
+- Lightweight and modular codebase for customization
 
 ## Directory Structure
 
@@ -59,36 +59,70 @@ python train.py
 ```bash
 python generate.py
 ```
+The generated music is saved as `output_music.mid`.
 
-Generated music is saved as `output_music.mid`.
+## Preprocessing Steps
 
-~~Listen to the latest generated sample:~~
+### Extract Notes and Chords
+- MIDI files are parsed using music21 to extract individual notes and chords
+- Notes are stored as strings (e.g., "C4"), and chords are represented as dot-separated strings of note integers (e.g., "60.64.67")
 
+### Create Input-Output Sequences
+- A sliding window of sequences is created with a fixed length (e.g., 100 notes)
+- Each sequence serves as input, and the following note/chord serves as output
+
+### Normalize Data
+- Input sequences are mapped to integers and normalized to [0, 1]
+- Normalization is done by dividing by the total number of unique notes/chords
+
+### Save Processed Data
+- Processed sequences and mappings (note_to_int and int_to_note) are saved for training and generation
 
 ## Model Overview
 
-* Architecture: 3 LSTM layers (512 units), batch normalization, dropout, dense layers, softmax output
-* Input: Sequences of notes/chords extracted from MIDI files
-* Output: Predicted next notes or chords
+### Architecture
+
+The LSTM model uses PyTorch with:
+
+- **LSTM Layers**: Three layers with 512 hidden units and recurrent dropout
+- **Batch Normalization**: For faster convergence and stability
+- **Dense Layers**: 256 units with ReLU activation
+- **Dropout Layers**: 30% dropout rate
+- **Softmax Output Layer**: Probability distribution over possible notes/chords
+
+### Input and Output
+- Input: Sequence of 100 notes/chords (normalized integers)
+- Output: Next note/chord prediction (one-hot encoded)
 
 ## Dataset
 
-Use single-instrument MIDI files. Public datasets:
+### Requirements
+- Single-instrument MIDI files (e.g., piano)
+- Recommended datasets:
+    - MAESTRO
+    - MIDIWorld
 
-* [MAESTRO](https://magenta.tensorflow.org/datasets/maestro)
-* [MIDIWorld](http://www.midiworld.com/)
+### Data Augmentation
 
-Augment your dataset by transposing MIDI files to multiple keys for better generalization.
+Example code for transposition:
+```python
+from music21 import converter
+
+midi = converter.parse("example.mid")
+for semitone in range(-5, 6):  # Transpose to nearby keys
+        transposed = midi.transpose(semitone)
+        transposed.write("midi", fp=f"example_transposed_{semitone}.mid")
+```
 
 ## Troubleshooting
 
-* Repetitive output:
-        * Use temperature sampling (generate.py)
-        * Add more training data
-        * Reduce learning rate
+### Repetitive Output
+- Use temperature sampling in generate.py
+- Add more training data
+- Reduce the learning rate
 
-* Memory errors:
-        * Decrease batch size in train.py
+### Memory Errors
+- Decrease the batch size in train.py
 
 ## License
 
