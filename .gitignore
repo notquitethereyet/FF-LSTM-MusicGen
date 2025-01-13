@@ -12,7 +12,6 @@ env/
 # Data and generated files
 data/processed_data.pkl
 data/*.mid
-output_music.mid
 best_model.pth
 *.hdf5
 
